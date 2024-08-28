@@ -28,7 +28,7 @@ project_root/
 To get started with **KeyGenie**, clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/your-username/keygenie.git
+git clone https://github.com/Deepanshu291/KeyGenie.AI.git
 cd keygenie
 pip install -r requirements.txt
 ```
