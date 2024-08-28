@@ -1,14 +1,14 @@
 import time
 from pynput.keyboard import Controller, Key
 import pyperclip
-from services.text_processor import TextProcessor
+from KeyGenieAi.services.text_processor import TextProcessor
 
 class TextUseCase:
     def __init__(self):
         self.keyboard = Controller()
         self.processor = TextProcessor()
         self.replace_flag = None
-        self.aicmd = ["$gen", "$ai", "$phi3", "$fix"]
+        self.aicmd = ["$gen", "$ai", "$phi3", "$fix","$para"]
 
     def copy_text(self):
         self.select_text()
@@ -24,13 +24,13 @@ class TextUseCase:
         with self.keyboard.pressed(Key.shift):
             self.keyboard.tap(Key.end)
 
-    def process_text(self, text, paraphrase=False):
+    def process_text(self):
         self.select_text()
         time.sleep(0.1)
         self.keyboard.type("generating....")
         self.select_text()
-        fixed_text = self.processor.fix_text(text, paraphrase)
-        return fixed_text
+        # fixed_text = self.processor.fix_text(text, paraphrase)
+        # return fixed_text
 
     def extract_command(self, text):
         start_index = end_index = None
