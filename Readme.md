@@ -1,5 +1,3 @@
----
-
 # 🧞‍♂️ KeyGenie
 
 Welcome to **KeyGenie**! Your personal assistant for automating text processing and AI-driven text generation right from your keyboard. ✨
@@ -67,7 +65,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📧 Contact
 
-For any questions or feedback, reach out at [your-email@example.com](mailto:your-email@example.com).
+For any questions or feedback, reach out at [deepanshu2912001@gmail.com](mailto:deepanshu2912001@gmail.com).
 
 ---
 
