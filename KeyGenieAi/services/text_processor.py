@@ -1,12 +1,15 @@
 from string import Template
 import ollama as olm
 
-class TextProcessor:
-    def __init__(self, model='phi3'):
+class OllamaProcessor:
+    model = ""
+    def __init__(self, model):
         self.model = model
+        print(self.model)
 
     def generate(self, prompt):
         res = olm.generate(model=self.model, prompt=prompt)
+        print(self.model)
         return res["response"]
 
     def fix_text(self, text, paraphrase=False):

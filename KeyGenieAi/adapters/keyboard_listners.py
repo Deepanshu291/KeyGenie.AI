@@ -2,8 +2,8 @@ from pynput.keyboard import Listener, Key
 from KeyGenieAi.application.text_usecase import TextUseCase
 
 class KeyboardListener:
-    def __init__(self):
-        self.text_use_case = TextUseCase()
+    def __init__(self,model):
+        self.text_use_case = TextUseCase(model=model)
 
     def on_press(self, key):
         try:
@@ -20,14 +20,14 @@ class KeyboardListener:
             if key == Key.f7:
                 text = self.text_use_case.copy_text()
                 self.text_use_case.process_text()
-                fixed_text = self.text_use_case.processor.fix_text(text)
+                fixed_text = self.text_use_case.llm.fix_text(text)
                 self.text_use_case.select_text()
                 self.text_use_case.keyboard.type(fixed_text)
 
             if key == Key.f8:
                 text = self.text_use_case.copy_text()
                 self.text_use_case.process_text()
-                fixed_text = self.text_use_case.processor.fix_text(text,paraphrase=True)
+                fixed_text = self.text_use_case.llm.fix_text(text,paraphrase=True)
                 self.text_use_case.select_text()
                 self.text_use_case.keyboard.type(fixed_text)
 
@@ -36,17 +36,17 @@ class KeyboardListener:
                 prompt = self.text_use_case.extract_command(text)
                 if prompt and any(cmd in text for cmd in ['$gen', '$ai']):
                     self.text_use_case.process_text()
-                    generated_text = self.text_use_case.processor.generate(prompt)
+                    generated_text = self.text_use_case.llm.generate(prompt)
                     self.text_use_case.select_text()
                     self.text_use_case.keyboard.type(generated_text)
                 elif prompt and '$fix' in text:
                     self.text_use_case.process_text()
-                    generated_text = self.text_use_case.processor.fix_text(prompt)
+                    generated_text = self.text_use_case.llm.fix_text(prompt)
                     self.text_use_case.select_text()
                     self.text_use_case.keyboard.type(generated_text)
                 if prompt and '$para' in text:
                     self.text_use_case.process_text()
-                    generated_text = self.text_use_case.processor.fix_text(text=prompt, paraphrase=True)
+                    generated_text = self.text_use_case.llm.fix_text(text=prompt, paraphrase=True)
                     self.text_use_case.select_text()
                     self.text_use_case.keyboard.type(generated_text)
                 self.text_use_case.replace_flag = None

@@ -1,12 +1,14 @@
 import time
 from pynput.keyboard import Controller, Key
 import pyperclip
-from KeyGenieAi.services.text_processor import TextProcessor
+from KeyGenieAi.services.text_processor import OllamaProcessor
 
 class TextUseCase:
-    def __init__(self):
+    model =""
+    def __init__(self,model):
+        self.model = model
         self.keyboard = Controller()
-        self.processor = TextProcessor()
+        self.llm = OllamaProcessor(model=model)
         self.replace_flag = None
         self.aicmd = ["$gen", "$ai", "$phi3", "$fix","$para"]
 
@@ -27,7 +29,8 @@ class TextUseCase:
     def process_text(self):
         self.select_text()
         time.sleep(0.1)
-        self.keyboard.type("generating....")
+        model_name = str(self.llm.model).split(':')[0]
+        self.keyboard.type(f"{model_name} is generating....")
         self.select_text()
         # fixed_text = self.processor.fix_text(text, paraphrase)
         # return fixed_text
